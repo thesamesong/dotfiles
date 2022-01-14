@@ -1,0 +1,29 @@
+#!/bin/bash
+
+COLOR_WHITE='\033[0;37m'
+COLOR_B_PURPLE='\033[1;35m'
+COLOR_DEFAULT='\033[0m'
+
+function logger {
+    echo -e "${COLOR_B_PURPLE}[dotfiles]:${COLOR_WHITE} $1${COLOR_DEFAULT}"
+}
+
+if [[ ! -f ~/.local/share/nvim/site/autoload/plug.vim ]]
+then
+    logger "Installing vim-plug (nvim)"
+    sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+fi
+
+logger "Creating symlinks for nvim and tmux"
+
+mkdir -p $HOME/.config/nvim
+ln -sf $(pwd)/src/nvim/init.vim $HOME/.config/nvim/init.vim
+ln -sf $(pwd)/src/nvim/colors $HOME/.config/nvim/colors
+
+ln -sf $(pwd)/src/tmux.conf $HOME/.tmux.conf
+
+logger "Creating undo-dir"
+mkdir -p $HOME/.vim/undo-dir
+
+logger "Done"
