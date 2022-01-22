@@ -23,6 +23,9 @@ ln -sf $(pwd)/src/nvim/colors $HOME/.config/nvim/colors
 
 ln -sf $(pwd)/src/tmux.conf $HOME/.tmux.conf
 
+mkdir -p $HOME/.zsh-scripts
+ln -sf $(pwd)/src/zsh-scripts/iterm2.zsh $HOME/.zsh-scripts/iterm2.zsh
+
 logger "Creating undo-dir"
 mkdir -p $HOME/.vim/undo-dir
 
